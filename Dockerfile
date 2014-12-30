@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* \
 
 # install Java
 ENV JAVA_VERSION 7u71
-ENV JAVA_DEBIAN_VERSION 7u71-2.5.3-2
+ENV JAVA_DEBIAN_VERSION 7u71-2.5.3-2~deb7u1
 RUN apt-get update && apt-get install -y curl openjdk-7-jre-headless="$JAVA_DEBIAN_VERSION" unzip wget && rm -rf /var/lig/apt/lists/*
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/bin
 
