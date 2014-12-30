@@ -24,7 +24,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/bin
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
 ENV ES_MAJOR 1.4
-RUN echo 'deb http://packages.elasticsearch.org/elasticsearch/${ES_MAJOR}/debian stable main' > /etc/apt/sources.list.d/es.list
+RUN echo "deb http://packages.elasticsearch.org/elasticsearch/${ES_MAJOR}/debian stable main" > /etc/apt/sources.list.d/es.list
 
 RUN apt-get update && apt-get install -y elasticsearch && rm -rf /var/lib/apt/lists/*
 
