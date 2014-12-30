@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 
-ES_USER="elasticsearch"
-ES_GROUP="elasticsearch"
-NAME='elasticsearch'
 
 if [ "$1" = "$NAME" ]; then
+  ES_USER="elasticsearch"
+  ES_GROUP="elasticsearch"
+  NAME='elasticsearch'
+
   MAX_OPEN_FILES=65535
 
   # From the elasticsearch init files
@@ -20,8 +21,7 @@ if [ "$1" = "$NAME" ]; then
   WORK_DIR=/tmp/$NAME
 
   OPTS="--default.config=$CONF_FILE --default.path.home=$ES_HOME --default.path.logs=$LOG_DIR --default.path.data=$DATA_DIR --default.path.work=$WORK_DIR --default.path.conf=$CONF_DIR"
-
-  mkdir -p "$LOG_DIR" "$DATA_DIR" "$WORK_DIR" && chown "$ES_USER":"$ES_GROUP" "$LOG_DIR" "$DATA_DIR" "$WORK_DIR"
+  mkdir -p "$LOG_DIR" "$DATA_DIR" "$WORK_DIR" && chown -R "$ES_USER":"$ES_GROUP" "$LOG_DIR" "$DATA_DIR" "$WORK_DIR"
 
   if [ -n "$MAX_OPEN_FILES" ]; then
     ulimit -n $MAX_OPEN_FILES
