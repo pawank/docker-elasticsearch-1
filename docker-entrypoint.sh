@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
 
+NAME='elasticsearch'
 
 if [ "$1" = "$NAME" ]; then
-  NAME='elasticsearch'
-
   MAX_OPEN_FILES=65535
 
   # From the elasticsearch init files
