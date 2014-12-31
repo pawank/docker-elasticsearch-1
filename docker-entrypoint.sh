@@ -3,8 +3,6 @@ set -e
 
 
 if [ "$1" = "$NAME" ]; then
-  ES_USER="elasticsearch"
-  ES_GROUP="elasticsearch"
   NAME='elasticsearch'
 
   MAX_OPEN_FILES=65535
@@ -28,7 +26,7 @@ if [ "$1" = "$NAME" ]; then
   fi
 
   shift
-  exec gosu "$ES_USER" "$NAME" $OPTS "$@"
+  exec gosu "$ES_USER:$ES_GROUP" "$NAME" $OPTS "$@"
 fi
 
 exec "$@"

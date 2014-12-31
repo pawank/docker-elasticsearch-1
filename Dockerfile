@@ -1,7 +1,10 @@
 FROM debian:wheezy
 
+ENV ES_USER elasticsearch
+ENV ES_GROUP elasticsearch
+
 # add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r elasticsearch && useradd -r -g elasticsearch elasticsearch
+RUN groupadd -r "$ES_GROUP" && useradd -r -g "$ES_GROUP" "$ES_USER"
 
 # grab gosu for easy step-down from root
 RUN gpg --keyserver pgp.mit.edu --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
