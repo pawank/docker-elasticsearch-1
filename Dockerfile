@@ -32,8 +32,13 @@ RUN apt-get update && apt-get install -y elasticsearch && rm -rf /var/lib/apt/li
 
 # Configure environment
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-ENV ES_DATA /data
-VOLUME /data
+
+ENV ES_HOME /usr/share/elasticsearch
+ENV ES_DATA /var/lib/elasticsearch
+ENV ES_LOGS /var/log/elasticsearch
+
+VOLUME /var/lib/elasticsearch
+VOLUME /var/log/elasticsearch
 
 COPY docker-entrypoint.sh /
 
