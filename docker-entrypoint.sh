@@ -14,7 +14,7 @@ if [ "$1" = "$NAME" ]; then
   mkdir -p "$ES_LOGS" "$ES_DATA" "$WORK_DIR" && chown -R "$ES_USER":"$ES_GROUP" "$ES_LOGS" "$ES_DATA" "$WORK_DIR"
 
   shift
-  exec gosu "$ES_USER:$ES_GROUP" "$NAME" $OPTS "$@"
+  set -- gosu "$ES_USER:$ES_GROUP" "$NAME" $OPTS "$@"
 fi
 
 exec "$@"
