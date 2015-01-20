@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM java:openjdk-7-jre
 
 ENV ES_USER elasticsearch
 ENV ES_GROUP elasticsearch
@@ -15,12 +15,6 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* \
   && rm /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu \
   && apt-get purge -y --auto-remove curl
-
-# install Java
-ENV JAVA_VERSION 7u71
-ENV JAVA_DEBIAN_VERSION 7u71-2.5.3-2~deb7u1
-RUN apt-get update && apt-get install -y curl openjdk-7-jre-headless="$JAVA_DEBIAN_VERSION" unzip wget && rm -rf /var/lig/apt/lists/*
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/bin
 
 # install Elasticsearch
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -44,6 +38,5 @@ COPY docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 9200
-EXPOSE 9300
+EXPOSE 9200 9300
 CMD ["elasticsearch"]
