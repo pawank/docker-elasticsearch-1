@@ -20,9 +20,10 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* \
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
 ENV ES_MAJOR 1.4
+ENV ES_DEBIAN_VERSION 1.4.2
 RUN echo "deb http://packages.elasticsearch.org/elasticsearch/${ES_MAJOR}/debian stable main" > /etc/apt/sources.list.d/es.list
 
-RUN apt-get update && apt-get install -y elasticsearch && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y elasticsearch="$ES_DEBIAN_VERSION" && rm -rf /var/lib/apt/lists/*
 
 # Configure environment
 ENV PATH /usr/share/elasticsearch/bin:$PATH
