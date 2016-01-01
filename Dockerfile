@@ -1,4 +1,4 @@
-FROM java:openjdk-7-jre
+FROM rapidor/ubuntu-jdk8:1.0
 
 ENV ES_USER elasticsearch
 ENV ES_GROUP elasticsearch
@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/* \
 # install Elasticsearch
 RUN apt-key adv --keyserver pgp.mit.edu --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
-ENV ES_MAJOR 1.4
-ENV ES_DEBIAN_VERSION 1.4.2
+ENV ES_MAJOR 1.7
+ENV ES_DEBIAN_VERSION 1.7.4
 RUN echo "deb http://packages.elasticsearch.org/elasticsearch/${ES_MAJOR}/debian stable main" > /etc/apt/sources.list.d/es.list
 
 RUN apt-get update && apt-get install -y elasticsearch="$ES_DEBIAN_VERSION" && rm -rf /var/lib/apt/lists/*
@@ -34,6 +34,8 @@ ENV ES_LOGS /var/log/elasticsearch
 
 VOLUME /var/lib/elasticsearch
 VOLUME /var/log/elasticsearch
+
+RUN sudo chown -R elasticsearch:elasticsearch /var/lib/elasticsearch/
 
 COPY docker-entrypoint.sh /
 
